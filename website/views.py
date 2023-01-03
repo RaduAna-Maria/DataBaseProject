@@ -21,3 +21,11 @@ def change_password():
 @views.route('/delete_account')
 def delete_account():
     return render_template('delete_account.html')
+
+@views.route('/home/edit_database')
+def home_edit_database():
+    return render_template('home.html')
+
+@views.route('/home/statistics')
+def home_statistics():
+    return render_template('home.html')

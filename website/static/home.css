@@ -2,3 +2,13 @@
     text-align: center;
     position: center;
 }
+
+.query{
+    display: flex;
+    justify-content: center; 
+}
+
+form{
+    padding-right: 5%;
+    display: inline-block;
+}

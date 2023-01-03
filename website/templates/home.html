@@ -29,6 +29,22 @@
 {% block container%}
     <div id="bg1">
         <h2>Welcome</h2>
-        <p><i>'I've accomplished more than I ever dreamed. But I'm hungry for more.' - Lewis Hamilton </i></p>
+        <!-- <p><i>'I've accomplished more than I ever dreamed. But I'm hungry for more.' - Lewis Hamilton </i></p> -->
+        <!-- <p><i>I've always believed that you should never, ever give up and you should always keep fighting even when there's only a slightest chance.</p></i> -->
+        <p><i>Never think that success is down to your own performance alone. If you start listening only to yourself you take the first step back towards the bottom. The flowers of victory belong in many vases.</p></i>
+        <p><i>— Michael Schumacher </p></i>
     </div>
+
+    <div class= "query">
+        <form action="/home/edit_database">
+            <button type="submit" class="btn btn-outline-light" href="/home/edit_database">Edit DataBase</button>
+        </form>
+
+        <form action="/home/statistics">
+            <button type="submit" class="btn btn-outline-light" href="/home/statistics">Statistics</button>
+        </form>
+    </div>
+    
 {% endblock %}
+
+

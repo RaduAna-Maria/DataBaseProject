@@ -118,3 +118,11 @@ def delete_account():
             return redirect(url_for('views.login'))
 
     return render_template("delete_account.html")
+
+@auth.route('/home/edit_database', methods=['GET','POST'])
+def home_edit_database():
+    return render_template('home.html')
+
+@auth.route('/home/statistics', methods=['GET','POST'])
+def home_statistics():
+    return render_template('home.html')
