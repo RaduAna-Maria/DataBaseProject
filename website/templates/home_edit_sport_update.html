@@ -1,0 +1,62 @@
+{% extends "home.html" %}
+
+{% block title %} Edit Sport - Update {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_edit.css') }}">
+{% endblock %}
+
+{% block container %}
+<form method="POST">
+    <div class="flex-container">
+        <div class="scrollbar">
+            <h3>Update Sport</h3>
+            <div class="form-group">
+                <label for="name_update">Name</label>
+                <input type="text" class="form-control" id="name_update" name="name_update" placeholder="Sport name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="new_name_update">Name</label>
+                <input type="text" class="form-control" id="new_name_update" name="new_name_update" placeholder="Sport new name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="type_update">Type</label>
+                <input type="text" class="form-control" id="type_update" name="type_update" placeholder="Type"/>
+            </div>
+
+            <div class="form-group">
+                <label for="field_update">Field</label>
+                <input type="text" class="form-control" id="field_update" name="field_update" placeholder="Field"/>
+            </div>
+
+            <br>
+            <form action="/edit_database_sport" method="POST">
+                <button type="submit" class="btn btn-outline-light" href="/edit_database_sport" name="sport" value="update">Edit</button>
+            </form>
+        </div>
+
+        {% if acc != 0%}
+        <div class="scrollbar">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Field</th>
+                </tr>
+                {% for i in range(0,n,3) %}
+                <tr>
+                    <td>{{acc[i]}}</td>
+                    <td>{{acc[i+1]}}</td>
+                    <td>{{acc[i+2]}}</td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+</form>
+
+{% endblock %}

@@ -13,7 +13,12 @@
     background-repeat: no-repeat;
 }
 
+html{
+    overflow-y: scroll;
+}
+
 body{
+    overflow-y: scroll;
     color: none;
     overflow: hidden;
     background-color: none;

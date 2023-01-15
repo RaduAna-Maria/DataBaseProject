@@ -1,0 +1,51 @@
+{% extends "home.html" %}
+
+{% block title %} Simple Query 5 {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_edit.css') }}">
+{% endblock %}
+
+{% block container %}
+<div id="bg1">
+    <h2>Simple Query 5</h2>
+</div>
+<form method="POST">
+    <div class="flex-container">
+        <div class="scrollbar">
+            <p>Team's name, number of points, student's name and surname for the ones
+                who are not in the first year of study, have a grade greater than 7
+                and whose team received at least 10 points per victory.
+                Everything is ordered in decreasing order of number of points
+            </p>
+
+            <form action="/edit_database_university" method="POST">
+                <button type="submit" class="btn btn-outline-light" href="/simple_queries2" name="simple" value="q5">Run</button>
+            </form>
+        </div>
+
+        {% if acc != 0%}
+        <div class="scrollbar">
+            <table>
+                <tr>
+                    <th>Team name</th>
+                    <th>Number of points</th>
+                    <th>Student name</th>
+                    <th>Student surname</th>
+                </tr>
+                {% for i in range(0,n,4) %}
+                <tr>
+                    <td>{{acc[i]}}</td>
+                    <td>{{acc[i+1]}}</td>
+                    <td>{{acc[i+2]}}</td>
+                    <td>{{acc[i+3]}}</td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+</form>
+
+{% endblock %}

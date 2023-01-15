@@ -1,28 +1,41 @@
 Insert, Update, Delete:
-1. University, Sport
-2. Tournament, Team
-3. Student, TournamentTeam
+1. University, Sport*
+2. Tournament*, Team*
+3. Student*, TournamentTeam*
 
 Interogari simple:
-1. Numarul de studenti din fiecare echipa
+1. Numele fiecarei echipe si numarul de studenti din aceasta
 	SELECT T.Name, Count(S.TeamID) 
 	FROM  Team T LEFT JOIN Student S
 	ON T.TeamID = S.TeamID
 	GROUP BY T.Name
 2. Numele si prenumele studentilor care participa la cel putin x turnee
-	SELECT S.Name, S.Surname
-	FROM Student S JOIN TournamentTeam TT
+	SELECT S.Name, S.Surname, T.Name
+	FROM Student S JOIN Team T ON S.TeamID = T.TeamID
+	JOIN TournamentTeam TT
 	ON S.TeamID = TT.TeamID
-	GROUP BY TT.TeamID
+	GROUP BY S.Name, S.Surname, T.Name
 	HAVING COUNT(TT.TeamID) >= x
 3. Numele echipelor care joaca in turnee care incep dupa luna aprilie
-	SELECT T.Name
-	FROM Team T JOIN Tournament TOU
+	SELECT DISTINCT T.Name
+	FROM Team T LEFT JOIN Tournament TOU
 	ON T.SportID = TOU.SportID
 	WHERE TOU.StartDate > '30-04-2023'
-	GROUP BY T.SportID
-4. Numele universitatilor care 
-5.
+	GROUP BY T.Name
+4. Numele universitatilor si numarul sportivilor de sex feminin
+	SELECT U.Name, COUNT(S.StudentID) AS NUmberOfStudents
+	FROM University U JOIN Student S ON U.UniversityID = S.UniversityID
+	WHERE S.Sex = 'F'
+	GROUP BY U.Name
+5. Numele si prenumele studentilor care nu sunt in primul an de studiu, au media mai mare de 7
+si joaca la echipe care au primit cel putin 10 puncte per victorie, ordonati descrescator dupa nr de puncte
+	SELECT T.Name, TT.NumberOfPoints, S.Name, S.Surname
+	FROM STUDENT S 
+	JOIN Team T ON S.TeamID = T.TeamID
+	JOIN TournamentTeam TT ON T.TeamID = TT.TeamID
+	WHERE S.YearOfStudy > 1 AND S.Grade > 7 AND 10*T.NumberOfVictories < TT.NumberOfPoints
+	GROUP BY T.Name, TT.NumberOfPoints, S.Name, S.Surname
+	ORDER BY TT.NumberOfPoints DESC
 6. Top 3 echipe cu cele mai multe victorii dintr-un sport (parametru)
 	SELECT TOP 3 T.Name, T.NumberOfVictories
 	FROM Team T JOIN Sport S
@@ -35,3 +48,5 @@ Interogari complexe:
 2.
 3.
 4.
+
+

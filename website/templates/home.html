@@ -29,20 +29,52 @@
 {% block container%}
     <div id="bg1">
         <h2>Welcome</h2>
-        <!-- <p><i>'I've accomplished more than I ever dreamed. But I'm hungry for more.' - Lewis Hamilton </i></p> -->
-        <!-- <p><i>I've always believed that you should never, ever give up and you should always keep fighting even when there's only a slightest chance.</p></i> -->
         <p><i>Never think that success is down to your own performance alone. If you start listening only to yourself you take the first step back towards the bottom. The flowers of victory belong in many vases.</p></i>
         <p><i>— Michael Schumacher </p></i>
     </div>
+    <br><br>
 
-    <div class= "query">
-        <form action="/home/edit_database">
-            <button type="submit" class="btn btn-outline-light" href="/home/edit_database">Edit DataBase</button>
-        </form>
+    <div class= "query" method>
+        <div class="dropdown">
+            <button class="dropbtn btn btn-outline-light">Edit University</button>
+                <div class="dropdown-content">
+                <a href="/edit_database_university_insert">Insert</a>
+                <a href="/edit_database_university_update">Update</a>
+                <a href="/edit_database_university_delete">Delete</a>
+                </div>
+            </div>
 
-        <form action="/home/statistics">
-            <button type="submit" class="btn btn-outline-light" href="/home/statistics">Statistics</button>
-        </form>
+        <div class="dropdown">
+            <button class="dropbtn btn btn-outline-light">Edit Sport</button>
+                <div class="dropdown-content">
+                <a href="/edit_database_sport_insert">Insert</a>
+                <a href="/edit_database_sport_update">Update</a>
+                <a href="/edit_database_sport_delete">Delete</a>
+                </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn btn btn-outline-light">Simple queries</button>
+                <div class="dropdown-content">
+                <a href="/simple_queries1">Query 1</a>
+                <a href="/simple_queries2">Query 2</a>
+                <a href="/simple_queries3">Query 3</a>
+                <a href="/simple_queries4">Query 4</a>
+                <a href="/simple_queries5">Query 5</a>
+                <a href="/simple_queries6">Query 6</a>
+                </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn btn btn-outline-light">Compex queries</button>
+                <div class="dropdown-content">
+                <a href="/complex_queries1">Query 1</a>
+                <a href="/complex_queries2">Query 2</a>
+                <a href="/complex_queries3">Query 3</a>
+                <a href="/complex_queries4">Query 4</a>
+                </div>
+        </div>
+
     </div>
     
 {% endblock %}

@@ -1,0 +1,66 @@
+{% extends "home.html" %}
+
+{% block title %} Edit University - Update {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_edit.css') }}">
+{% endblock %}
+
+{% block container %}
+<form method="POST">
+    <div class="flex-container">
+        <div class="scrollbar">
+            <h3>Update University</h3>
+            <div class="form-group">
+                <label for="name_update">Name</label>
+                <input type="text" class="form-control" id="name_update" name="name_update" placeholder="University name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="name_update">New name</label>
+                <input type="text" class="form-control" id="new_name_update" name="new_name_update" placeholder="University new name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="street_update">Street</label>
+                <input type="text" class="form-control" id="street_update" name="street_update" placeholder="Street"/>
+            </div>
+
+            <div class="form-group">
+                <label for="number_update">Number</label>
+                <input type="text" class="form-control" id="number_update" name="number_update" placeholder="Number"/>
+            </div>
+
+            <br>
+            <form action="/edit_database_university" method="POST">
+                <button type="submit" class="btn btn-outline-light" href="/edit_database_university" name="university" value="update">Edit</button>
+            </form>
+        </div>
+
+        {% if acc != 0%}
+        <div class="scrollbar">
+            <table>
+                <tr>
+                    <th>University</th>
+                    <th>Street</th>
+                    <th>Number</th>
+                    <th>City</th>
+                    <th>County</th>
+                </tr>
+                {% for i in range(0,n,5) %}
+                <tr>
+                    <td>{{acc[i]}}</td>
+                    <td>{{acc[i+1]}}</td>
+                    <td>{{acc[i+2]}}</td>
+                    <td>{{acc[i+3]}}</td>
+                    <td>{{acc[i+4]}}</td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+        {% endif %}
+        
+    </div>
+</form>
+
+{% endblock %}

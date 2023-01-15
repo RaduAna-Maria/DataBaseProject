@@ -1,0 +1,71 @@
+{% extends "home.html" %}
+
+{% block title %} Edit University - Insert {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_edit.css') }}">
+{% endblock %}
+
+{% block container %}
+<form method="POST">
+    <div class="flex-container">
+        <div class="scrollbar">
+            <h3>Insert University</h3>
+            <div class="form-group">
+                <label for="name_insert">Name</label>
+                <input type="text" class="form-control" id="name_insert" name="name_insert" placeholder="University name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="street_insert">Street</label>
+                <input type="text" class="form-control" id="street_insert" name="street_insert" placeholder="Street"/>
+            </div>
+
+            <div class="form-group">
+                <label for="number_insert">Number</label>
+                <input type="text" class="form-control" id="number_insert" name="number_insert" placeholder="Number"/>
+            </div>
+
+            <div class="form-group">
+                <label for="city_insert">City</label>
+                <input type="text" class="form-control" id="city_insert" name="city_insert" placeholder="City"/>
+            </div>
+
+            <div class="form-group">
+                <label for="county_insert">County</label>
+                <input type="text" class="form-control" id="county_insert" name="county_insert" placeholder="County"/>
+            </div>
+
+            <br>
+            <form action="/edit_database_university" method="POST">
+                <button type="submit" class="btn btn-outline-light" href="/edit_database_university" name="university" value="insert">Edit</button>
+            </form>
+        </div>
+
+        {% if acc != 0%}
+        <div class="scrollbar">
+            <table>
+                <tr>
+                    <th>University</th>
+                    <th>Street</th>
+                    <th>Number</th>
+                    <th>City</th>
+                    <th>County</th>
+                </tr>
+                {% for i in range(0,n,5) %}
+                <tr>
+                    <td>{{acc[i]}}</td>
+                    <td>{{acc[i+1]}}</td>
+                    <td>{{acc[i+2]}}</td>
+                    <td>{{acc[i+3]}}</td>
+                    <td>{{acc[i+4]}}</td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+</form>
+
+{% endblock %}
