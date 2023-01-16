@@ -44,8 +44,20 @@ si joaca la echipe care au primit cel putin 10 puncte per victorie, ordonati des
 	ORDER BY T.NumberOfVictories DESC
 
 Interogari complexe:
-1.
-2.
+1. Echipele care au cel mai mare nr de victorii pt fiecare sport. Ordine descrescatoare a punctelor
+	SELECT T.Name, T.NumberOfVictories, S.Name
+	FROM Team T JOIN Sport S ON T.SportID = S.SportID
+	WHERE T.NumberOfVictories IN (SELECT MAX(T2.NumberOfVictories)
+					FROM Team T2
+					WHERE T2.SportID = T.SportID)
+	ORDER BY T.NumberOfVictories
+2. Turneele care incep inainte de vreun turneu de inot si care nu sunt de inot
+	SELECT T.Name, S.Name, T.StartDate, T.EndDate
+	FROM Tournament T JOIN Sport S ON T.SportID = S.SportID
+	WHERE S.Name != 'Inot'
+	AND (T.StartDate > ANY (SELECT T2.StartDate
+				FROM Tournament T2 JOIN Sport S2 ON T2.SportID = S2.SportID
+				WHERE S2.Name = 'Inot'))
 3.
 4.
 

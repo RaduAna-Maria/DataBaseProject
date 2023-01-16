@@ -13,11 +13,7 @@
 <form method="POST">
     <div class="flex-container">
         <div class="scrollbar">
-            <p>The name and surname of the students who participate in more than
-                <div class="form-group">
-                    <input type="text" class="form-control" id="var" name="var" placeholder="number"/>
-                </div>
-            tournaments, and their team</p>
+            <p>The name of the teams whose players average grade is greater than the average grade of all te players of that sport</p>
             <br>
             <form action="/edit_database_university" method="POST">
                 <button type="submit" class="btn btn-outline-light" href="/simple_queries3" name="complex" value="q1">Run</button>
@@ -29,14 +25,12 @@
             <table>
                 <tr>
                     <th>Name</th>
-                    <th>Surname</th>
-                    <th>Team</th>
+                    <th>Average</th>
                 </tr>
-                {% for i in range(0,n,3) %}
+                {% for i in range(0,n,2) %}
                 <tr>
                     <td>{{acc[i]}}</td>
                     <td>{{acc[i+1]}}</td>
-                    <td>{{acc[i+2]}}</td>
                 </tr>
                 {% endfor%}
             </table>

@@ -13,11 +13,7 @@
 <form method="POST">
     <div class="flex-container">
         <div class="scrollbar">
-            <p>The name and surname of the students who participate in more than
-                <div class="form-group">
-                    <input type="text" class="form-control" id="var" name="var" placeholder="number"/>
-                </div>
-            tournaments, and their team</p>
+            <p>The name, surname, university and sport of the students with the lowest grade in their team.</p>
             <br>
             <form action="/edit_database_university" method="POST">
                 <button type="submit" class="btn btn-outline-light" href="/simple_queries3" name="complex" value="q1">Run</button>
@@ -30,13 +26,19 @@
                 <tr>
                     <th>Name</th>
                     <th>Surname</th>
+                    <th>Grade</th>
                     <th>Team</th>
+                    <th>Uniersity</th>
+                    <th>Sport</th>
                 </tr>
-                {% for i in range(0,n,3) %}
+                {% for i in range(0,n,6) %}
                 <tr>
                     <td>{{acc[i]}}</td>
                     <td>{{acc[i+1]}}</td>
                     <td>{{acc[i+2]}}</td>
+                    <td>{{acc[i+3]}}</td>
+                    <td>{{acc[i+4]}}</td>
+                    <td>{{acc[i+5]}}</td>
                 </tr>
                 {% endfor%}
             </table>

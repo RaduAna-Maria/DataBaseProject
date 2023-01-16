@@ -13,10 +13,14 @@
 <form method="POST">
     <div class="flex-container">
         <div class="scrollbar">
-            <p>The name of the tournaments which are not a swimming tournament and start before one</p>
+            <p>The name of the tournaments which are not a
+                <div class="form-group">
+                    <input type="text" class="form-control" id="var" name="var" placeholder="sport"/>
+                </div>
+            tournament and start before one</p>
             <br>
             <form action="/edit_database_university" method="POST">
-                <button type="submit" class="btn btn-outline-light" href="/simple_queries3" name="complex" value="q1">Run</button>
+                <button type="submit" class="btn btn-outline-light" href="/complex_queries2" name="complex" value="q2">Run</button>
             </form>
         </div>
 

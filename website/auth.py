@@ -461,12 +461,16 @@ def compex_queries1():
 @auth.route('/complex_queries2', methods=['GET','POST'])
 def compex_queries2():
     if request.method == 'POST':
+        sport = request.form.get('var')
+        sport = sport.capitalize()
+
         query = """ SELECT T.Name, S.Name, T.StartDate, T.EndDate
                     FROM Tournament T JOIN Sport S ON T.SportID = S.SportID
-                    WHERE S.Name != 'Inot'
+                    WHERE S.Name != '{}'
                     AND (T.StartDate > ANY (SELECT T2.StartDate
                                             FROM Tournament T2 JOIN Sport S2 ON T2.SportID = S2.SportID
-                                            WHERE S2.Name = 'Inot'))"""
+                                            WHERE S2.Name = '{}'))"""
+        query = query.format(sport,sport)
         cursor.execute(query)
 
         p = []
@@ -481,8 +485,41 @@ def compex_queries2():
 
 @auth.route('/complex_queries3', methods=['GET','POST'])
 def compex_queries3():
-    return render_template("complex_queries3.html")
+    if request.method == 'POST':
+        query = """ SELECT S.Name, S.Surname, S.Grade, T.Name, U.Name, SP.Name
+                    FROM Student S JOIN University U ON S.UniversityID = U.UniversityID
+                    JOIN Team T ON S.TeamID = T.TeamID
+                    JOIN SPORT SP ON T.SportID = SP.SportID
+                    WHERE S.Grade IN (SELECT MIN(S2.Grade) FROM Student S2 WHERE S2.TeamID = S.TeamID)
+                    GROUP BY U.Name, T.Name, S.Grade, S.Name, S.Surname, SP.Name"""
+        cursor.execute(query)
+
+        p = []
+        for row in cursor.fetchall():
+            p.append(row[0])
+            p.append(row[1])
+            p.append(row[2])
+            p.append(row[3])
+            p.append(row[4])
+            p.append(row[5])
+        
+        cnxn.commit()
+    return render_template("complex_queries3.html", acc = p, n = len(p))
 
 @auth.route('/complex_queries4', methods=['GET','POST'])
 def compex_queries4():
-    return render_template("complex_queries4.html")
+    if request.method == 'POST':
+        query = """ SELECT T.Name, AVG(S.Grade)
+                    FROM Team T JOIN Student S ON T.TeamID = S.TeamID
+                    GROUP BY T.Name, T.SportID
+                    HAVING AVG(S.Grade) >= (SELECT AVG(S2.Grade) FROM Student S2 JOIN Team T2 ON S2.TeamID = T2.TeamID
+						                    WHERE T2.SportID = T.SportID)"""
+        cursor.execute(query)
+
+        p = []
+        for row in cursor.fetchall():
+            p.append(row[0])
+            p.append(row[1])
+        
+        cnxn.commit()
+    return render_template("complex_queries4.html", acc = p, n = len(p))
