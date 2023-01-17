@@ -342,10 +342,11 @@ def simple_queries1():
 @auth.route('/simple_queries2', methods=['GET','POST'])
 def simple_queries2():
     if request.method == 'POST':
-        query = """ SELECT T.Name, Count(S.TeamID) AS Students
+        query = """ SELECT T.Name, Count(S.TeamID) AS Players
                     FROM  Team T LEFT JOIN Student S
                     ON T.TeamID = S.TeamID
-                    GROUP BY T.Name"""
+                    GROUP BY T.Name
+                    ORDER BY Players DESC"""
         cursor.execute(query)
 
         p = []
@@ -360,16 +361,18 @@ def simple_queries2():
 @auth.route('/simple_queries3', methods=['GET','POST'])
 def simple_queries3():
     if request.method == 'POST':
-        query = """ SELECT DISTINCT T.Name
-                    FROM Team T LEFT JOIN Tournament TOU
+        query = """ SELECT DISTINCT T.Name, S.Name
+                    FROM Team T JOIN Tournament TOU
                     ON T.SportID = TOU.SportID
-                    WHERE TOU.StartDate > '2023/04/30'
-                    GROUP BY T.Name"""
+                    JOIN Sport S ON T.SportID = S.SportID
+                    WHERE TOU.StartDate > '2023-04-30'
+                    GROUP BY S.Name, T.Name"""
         cursor.execute(query)
 
         p = []
         for row in cursor.fetchall():
             p.append(row[0])
+            p.append(row[1])
         
         cnxn.commit()
     return render_template("simple_queries3.html", acc = p, n = len(p))
